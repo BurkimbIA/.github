@@ -36,26 +36,41 @@ jobs:
           plugin_activity_days: 14
           plugin_activity_filter: all
           output_action: none
-          filename: github-metrics.svg
+          filename: metrics_renders/github-metrics.svg
 
-      - name: Detect changes
-        id: diff
+      - name: Compute total organization stars
+        env:
+          GH_TOKEN: ${{ secrets.METRICS_TOKEN }}
         run: |
-          if git diff --quiet -- github-metrics.svg 2>/dev/null; then
-            echo "changed=false" >> $GITHUB_OUTPUT
-          else
-            echo "changed=true" >> $GITHUB_OUTPUT
-          fi
+          echo "Fetching repositories for organization BurkimbIA"
+          page=1
+          total=0
+          tmpfile=$(mktemp)
+          while : ; do
+            resp=$(curl -s -H "Authorization: Bearer $GH_TOKEN" "https://api.github.com/orgs/BurkimbIA/repos?type=public&per_page=100&page=$page")
+            count=$(echo "$resp" | jq 'length')
+            if [ "$count" -eq 0 ]; then
+              break
+            fi
+            stars=$(echo "$resp" | jq '[.[] | select(.fork==false) | .stargazers_count] | add // 0')
+            total=$((total + stars))
+            page=$((page + 1))
+          done
+          timestamp=$(date -u +"%Y-%m-%dT%H:%M:%SZ")
+          mkdir -p metrics_renders
+            cat > metrics_renders/org-stars.json <<EOF
+          {
+            "organization": "BurkimbIA",
+            "total_stars": $total,
+            "updated_at": "$timestamp"
+          }
+          EOF
+          echo "Computed total stars: $total"
 
-      - name: Commit updated metrics
-        if: steps.diff.outputs.changed == 'true'
+      - name: Commit metrics (always)
         run: |
           git config user.name "github-actions"
           git config user.email "github-actions@github.com"
-          git add github-metrics.svg
-          git commit -m "chore(metrics): update metrics svg"
-          git push
-
-      - name: Skip commit (no changes)
-        if: steps.diff.outputs.changed != 'true'
-        run: echo "No metrics changes detected, skipping commit."
+          git add metrics_renders/github-metrics.svg metrics_renders/org-stars.json
+          git commit -m "chore(metrics): refresh metrics svg + stars" || echo "No changes to commit"
+          git push || echo "Nothing pushed"
