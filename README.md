@@ -36,11 +36,11 @@ Resources are released for research & educational use. Contributors must respect
 
 | Metric | Value |
 |--------|-------|
-| 📁 Public Repositories | ![Public Repos](https://img.shields.io/badge/dynamic/json?color=green&label=&query=%24.public_repositories&url=https%3A%2F%2Fraw.githubusercontent.com%2FBurkimbIA%2FBurkimbIA%2Fmain%2Fmetrics_renders%2Forg-stats.json) |
-| 🔒 Private Repositories | ![Private Repos](https://img.shields.io/badge/dynamic/json?color=orange&label=&query=%24.private_repositories&url=https%3A%2F%2Fraw.githubusercontent.com%2FBurkimbIA%2FBurkimbIA%2Fmain%2Fmetrics_renders%2Forg-stats.json) |
+| 📁 Public Repositories | ![Public Repos](https://img.shields.io/badge/dynamic/json?color=blue&label=&query=%24.public_repositories&url=https%3A%2F%2Fraw.githubusercontent.com%2FBurkimbIA%2FBurkimbIA%2Fmain%2Fmetrics_renders%2Forg-stats.json) |
+| 🔒 Private Repositories | ![Private Repos](https://img.shields.io/badge/dynamic/json?color=blue&label=&query=%24.private_repositories&url=https%3A%2F%2Fraw.githubusercontent.com%2FBurkimbIA%2FBurkimbIA%2Fmain%2Fmetrics_renders%2Forg-stats.json) |
 | 📝 Total Commits | ![Total Commits](https://img.shields.io/badge/dynamic/json?color=blue&label=&query=%24.total_commits&url=https%3A%2F%2Fraw.githubusercontent.com%2FBurkimbIA%2FBurkimbIA%2Fmain%2Fmetrics_renders%2Forg-stats.json) |
-| 🔀 Pull Requests | ![Pull Requests](https://img.shields.io/badge/dynamic/json?color=purple&label=&query=%24.total_pull_requests&url=https%3A%2F%2Fraw.githubusercontent.com%2FBurkimbIA%2FBurkimbIA%2Fmain%2Fmetrics_renders%2Forg-stats.json) |
-| 👥 Contributors | ![Contributors](https://img.shields.io/badge/dynamic/json?color=red&label=&query=%24.total_contributors&url=https%3A%2F%2Fraw.githubusercontent.com%2FBurkimbIA%2FBurkimbIA%2Fmain%2Fmetrics_renders%2Forg-stats.json) |
+| 🔀 Pull Requests | ![Pull Requests](https://img.shields.io/badge/dynamic/json?color=blue&label=&query=%24.total_pull_requests&url=https%3A%2F%2Fraw.githubusercontent.com%2FBurkimbIA%2FBurkimbIA%2Fmain%2Fmetrics_renders%2Forg-stats.json) |
+| 👥 Contributors | ![Contributors](https://img.shields.io/badge/dynamic/json?color=blue&label=&query=%24.total_contributors&url=https%3A%2F%2Fraw.githubusercontent.com%2FBurkimbIA%2FBurkimbIA%2Fmain%2Fmetrics_renders%2Forg-stats.json) |
 
 </td>
 <td width="10%"></td>
@@ -75,3 +75,25 @@ Help collect data, improve models, write docs, deploy or run evaluations — all
 
 ---
 
+## 🤖 Our Models & Demos
+
+### 🎙️ Live Demos
+- **ASR Demo**: [Automatic Speech Recognition](https://huggingface.co/spaces/sawadogosalif/demo-asr) - Try our Moore language speech-to-text
+- **Sachi Demo**: [Voice Assistant](https://huggingface.co/spaces/sawadogosalif/demo-sachi) - Interactive AI assistant in Moore
+
+### 📊 Leaderboards & Collections
+- 🏆 **[Leaderboards Collection](https://huggingface.co/collections/burkimbia/leaderboards-68b379b1070cffb23702b7bc)** - Performance benchmarks for Moore AI models
+- 🎤 **[ASR Models Collection](https://huggingface.co/collections/burkimbia/asr-68b37904a9437afa485e2b46)** - Speech recognition models for Burkinabé languages
+- 🌐 **[Translation Models Collection](https://huggingface.co/collections/burkimbia/translation-models-68b378344625c60e48e18684)** - Language translation tools
+- 🗣️ **[TTS Models Collection](https://huggingface.co/collections/burkimbia/tts-68b376e8d76075b6c48a2601)** - Text-to-speech synthesis models
+
+### 🚀 Quick Links
+| Resource | Description | Status |
+|----------|-------------|--------|
+| [🎙️ ASR Demo](https://huggingface.co/spaces/sawadogosalif/demo-asr) | Speech-to-text in Moore | ![Status](https://img.shields.io/badge/status-live-green) |
+| [🤖 Sachi Assistant](https://huggingface.co/spaces/sawadogosalif/demo-sachi) | AI Voice Assistant | ![Status](https://img.shields.io/badge/status-live-green) |
+| [📊 Benchmarks](https://huggingface.co/collections/burkimbia/leaderboards-68b379b1070cffb23702b7bc) | Model Performance | ![Status](https://img.shields.io/badge/status-updated-blue) |
+
+---
+
+*Burkimbia - Building AI for Burkina Faso, by Burkina Faso* 🇧🇫
