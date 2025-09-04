@@ -64,7 +64,7 @@ Become a Burkimbila an Help to  collect data, improve models, write docs, deploy
 
 ---
 
-## 🤖 Our Models & Demos
+## Our Models & Demos
 
 ### 🎙️ Live Demos
 - **ASR Demo**: [Automatic Speech Recognition](https://huggingface.co/spaces/sawadogosalif/demo-asr) - Try our Moore language speech-to-text
@@ -75,7 +75,6 @@ Become a Burkimbila an Help to  collect data, improve models, write docs, deploy
 - 🎤 **[ASR Models Collection](https://huggingface.co/collections/burkimbia/asr-68b37904a9437afa485e2b46)** - Speech recognition models for Burkinabé languages
 - 🌐 **[Translation Models Collection](https://huggingface.co/collections/burkimbia/translation-models-68b378344625c60e48e18684)** - Language translation tools
 - 🗣️ **[TTS Models Collection](https://huggingface.co/collections/burkimbia/tts-68b376e8d76075b6c48a2601)** - Text-to-speech synthesis models
-
 
 ---
 
