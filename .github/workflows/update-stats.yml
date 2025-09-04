@@ -36,7 +36,7 @@ jobs:
           plugin_activity_days: 14
           plugin_activity_filter: all
           output_action: none
-          filename: metrics_renders/github-metrics.svg
+          filename: github-metrics.svg
 
       - name: Compute total organization stars
         env:
@@ -71,6 +71,11 @@ jobs:
         run: |
           git config user.name "github-actions"
           git config user.email "github-actions@github.com"
+          # Move SVG to correct location if needed
+          if [ -f "github-metrics.svg" ]; then
+            mkdir -p metrics_renders
+            mv github-metrics.svg metrics_renders/
+          fi
           git add metrics_renders/github-metrics.svg metrics_renders/org-stars.json
           git commit -m "chore(metrics): refresh metrics svg + stars" || echo "No changes to commit"
           git push || echo "Nothing pushed"
