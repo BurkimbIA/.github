@@ -38,34 +38,101 @@ jobs:
           output_action: none
           filename: github-metrics.svg
 
-      - name: Compute total organization stars
+      - name: Compute comprehensive organization stats
         env:
           GH_TOKEN: ${{ secrets.METRICS_TOKEN }}
         run: |
-          echo "Fetching repositories for organization BurkimbIA"
+          echo "Fetching comprehensive stats for organization BurkimbIA"
+          
+          # Initialize counters
+          public_repos=0
+          private_repos=0
+          total_commits=0
+          total_prs=0
+          declare -A contributors
+          
+          # Fetch all repositories (public and private)
           page=1
-          total=0
-          tmpfile=$(mktemp)
           while : ; do
-            resp=$(curl -s -H "Authorization: Bearer $GH_TOKEN" "https://api.github.com/orgs/BurkimbIA/repos?type=public&per_page=100&page=$page")
+            resp=$(curl -s -H "Authorization: Bearer $GH_TOKEN" "https://api.github.com/orgs/BurkimbIA/repos?per_page=100&page=$page")
             count=$(echo "$resp" | jq 'length')
             if [ "$count" -eq 0 ]; then
               break
             fi
-            stars=$(echo "$resp" | jq '[.[] | select(.fork==false) | .stargazers_count] | add // 0')
-            total=$((total + stars))
+            
+            # Count public/private repos
+            public_count=$(echo "$resp" | jq '[.[] | select(.private==false)] | length')
+            private_count=$(echo "$resp" | jq '[.[] | select(.private==true)] | length')
+            public_repos=$((public_repos + public_count))
+            private_repos=$((private_repos + private_count))
+            
+            # Process each repository for commits and PRs
+            echo "$resp" | jq -r '.[].name' | while read repo; do
+              if [ -n "$repo" ]; then
+                echo "Processing repo: $repo"
+                
+                # Count commits (limited to avoid API rate limits)
+                commits_resp=$(curl -s -H "Authorization: Bearer $GH_TOKEN" "https://api.github.com/repos/BurkimbIA/$repo/commits?per_page=100")
+                if [ "$commits_resp" != "null" ] && [ "$commits_resp" != "[]" ]; then
+                  commit_count=$(echo "$commits_resp" | jq 'length // 0')
+                  total_commits=$((total_commits + commit_count))
+                  
+                  # Count contributors
+                  echo "$commits_resp" | jq -r '.[].author.login // empty' | sort | uniq | while read contributor; do
+                    if [ -n "$contributor" ] && [ "$contributor" != "null" ]; then
+                      echo "$contributor" >> /tmp/contributors.txt
+                    fi
+                  done
+                fi
+                
+                # Count pull requests
+                prs_resp=$(curl -s -H "Authorization: Bearer $GH_TOKEN" "https://api.github.com/repos/BurkimbIA/$repo/pulls?state=all&per_page=100")
+                if [ "$prs_resp" != "null" ] && [ "$prs_resp" != "[]" ]; then
+                  pr_count=$(echo "$prs_resp" | jq 'length // 0')
+                  total_prs=$((total_prs + pr_count))
+                fi
+              fi
+            done
+            
             page=$((page + 1))
           done
+          
+          # Count unique contributors
+          total_contributors=0
+          if [ -f /tmp/contributors.txt ]; then
+            total_contributors=$(sort /tmp/contributors.txt | uniq | wc -l)
+          fi
+          
+          # Calculate commits per contributor
+          commits_per_contributor=0
+          if [ "$total_contributors" -gt 0 ]; then
+            commits_per_contributor=$((total_commits / total_contributors))
+          fi
+          
           timestamp=$(date -u +"%Y-%m-%dT%H:%M:%SZ")
           mkdir -p metrics_renders
-            cat > metrics_renders/org-stars.json <<EOF
+          
+          cat > metrics_renders/org-stats.json <<EOF
           {
             "organization": "BurkimbIA",
-            "total_stars": $total,
+            "public_repositories": $public_repos,
+            "private_repositories": $private_repos,
+            "total_repositories": $((public_repos + private_repos)),
+            "total_commits": $total_commits,
+            "total_pull_requests": $total_prs,
+            "total_contributors": $total_contributors,
+            "commits_per_contributor": $commits_per_contributor,
             "updated_at": "$timestamp"
           }
           EOF
-          echo "Computed total stars: $total"
+          
+          echo "Organization stats computed:"
+          echo "  Public repos: $public_repos"
+          echo "  Private repos: $private_repos"
+          echo "  Total commits: $total_commits"
+          echo "  Total PRs: $total_prs"
+          echo "  Contributors: $total_contributors"
+          echo "  Commits/contributor: $commits_per_contributor"
 
       - name: Commit metrics (always)
         run: |
@@ -76,6 +143,6 @@ jobs:
             mkdir -p metrics_renders
             mv github-metrics.svg metrics_renders/
           fi
-          git add metrics_renders/github-metrics.svg metrics_renders/org-stars.json
-          git commit -m "chore(metrics): refresh metrics svg + stars" || echo "No changes to commit"
+          git add metrics_renders/github-metrics.svg metrics_renders/org-stats.json
+          git commit -m "chore(metrics): refresh metrics svg + org stats" || echo "No changes to commit"
           git push || echo "Nothing pushed"
