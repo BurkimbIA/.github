@@ -14,6 +14,8 @@ Collect and curate datasets, train and evaluate models, and publish demos and re
 **Responsible use**
 Resources are released for research & educational use. Contributors must respect consent, provenance and licensing requirements. Commercial use requires permission from the BurkimbIA community.
 
+
+
 ## 📊 Organization Stats
 
 <div align="center">
@@ -27,7 +29,11 @@ Resources are released for research & educational use. Contributors must respect
 
 </div>
 
-### Overall Organization Stats
+<div style="display: flex; gap: 20px;">
+
+<div style="flex: 1;">
+
+### 📈 Overall Organization Stats
 
 | Metric | Value |
 |--------|-------|
@@ -36,6 +42,10 @@ Resources are released for research & educational use. Contributors must respect
 | 📝 Total Commits | ![Total Commits](https://img.shields.io/badge/dynamic/json?color=blue&label=&query=%24.total_commits&url=https%3A%2F%2Fraw.githubusercontent.com%2FBurkimbIA%2FBurkimbIA%2Fmain%2Fmetrics_renders%2Forg-stats.json) |
 | 🔀 Pull Requests | ![Pull Requests](https://img.shields.io/badge/dynamic/json?color=purple&label=&query=%24.total_pull_requests&url=https%3A%2F%2Fraw.githubusercontent.com%2FBurkimbIA%2FBurkimbIA%2Fmain%2Fmetrics_renders%2Forg-stats.json) |
 | 👥 Contributors | ![Contributors](https://img.shields.io/badge/dynamic/json?color=red&label=&query=%24.total_contributors&url=https%3A%2F%2Fraw.githubusercontent.com%2FBurkimbIA%2FBurkimbIA%2Fmain%2Fmetrics_renders%2Forg-stats.json) |
+
+</div>
+
+<div style="flex: 1;">
 
 ### 🏆 Top Contributors
 
@@ -46,6 +56,10 @@ Resources are released for research & educational use. Contributors must respect
 | josiaskabore | ![josiaskabore commits](https://img.shields.io/badge/dynamic/json?color=blue&label=commits&query=%24.contributor_commits.josiaskabore&url=https%3A%2F%2Fraw.githubusercontent.com%2FBurkimbIA%2FBurkimbIA%2Fmain%2Fmetrics_renders%2Forg-stats.json) |
 | anyantudre | ![anyantudre commits](https://img.shields.io/badge/dynamic/json?color=blue&label=commits&query=%24.contributor_commits.anyantudre&url=https%3A%2F%2Fraw.githubusercontent.com%2FBurkimbIA%2FBurkimbIA%2Fmain%2Fmetrics_renders%2Forg-stats.json) |
 | Pegdwende649 | ![Pegdwende649 commits](https://img.shields.io/badge/dynamic/json?color=blue&label=commits&query=%24.contributor_commits.Pegdwende649&url=https%3A%2F%2Fraw.githubusercontent.com%2FBurkimbIA%2FBurkimbIA%2Fmain%2Fmetrics_renders%2Forg-stats.json) |
+
+</div>
+
+</div>
 
 ## 🌍 Community
 
