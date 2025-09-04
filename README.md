@@ -25,13 +25,12 @@ Resources are released for research & educational use. Contributors must respect
 
 ![GitHub Org's stars](https://img.shields.io/github/stars/BurkimbIA?affiliations=OWNER&style=social)
 ![GitHub followers](https://img.shields.io/github/followers/BurkimbIA?style=social)
-![GitHub repo count](https://img.shields.io/badge/dynamic/json?color=blue&label=repositories&query=%24.public_repos&url=https%3A%2F%2Fapi.github.com%2Fusers%2FBurkimbIA&style=flat-square)
 
 </div>
 
 <table>
 <tr>
-<td width="50%" valign="top">
+<td width="45%" valign="top">
 
 ### 📈 Overall Organization Stats
 
@@ -44,7 +43,8 @@ Resources are released for research & educational use. Contributors must respect
 | 👥 Contributors | ![Contributors](https://img.shields.io/badge/dynamic/json?color=red&label=&query=%24.total_contributors&url=https%3A%2F%2Fraw.githubusercontent.com%2FBurkimbIA%2FBurkimbIA%2Fmain%2Fmetrics_renders%2Forg-stats.json) |
 
 </td>
-<td width="50%" valign="top">
+<td width="10%"></td>
+<td width="45%" valign="top">
 
 ### 🏆 Top Contributors
 
