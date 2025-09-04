@@ -57,7 +57,7 @@ Become a Burkimbila an Help to  collect data, improve models, write docs, deploy
 
 </td>
 
-*Auto-updated from organization statistics*
+*Auto-updated from organization statistics at 6 AM every day or manually*
 </tr>
 </table>
 
