@@ -20,12 +20,15 @@ Resources are released for research & educational use. Contributors must respect
 * **Discord:** *coming soon*
 * **Contact:** contact@burkimbia.org
 
-**Become a Burkimbila**
-Help collect data, improve models, write docs, deploy or run evaluations — all contributions welcome.
+
 
 <table>
 <tr>
 <td width="45%" valign="top">
+
+## Commnity
+
+Become a Burkimbila an Help to  collect data, improve models, write docs, deploy or run evaluations — all contributions welcome
 
 ### 📈 Organization Stats
 
@@ -53,8 +56,8 @@ Help collect data, improve models, write docs, deploy or run evaluations — all
 
 
 </td>
-*Auto-updated from organization statistics*
 
+*Auto-updated from organization statistics*
 </tr>
 </table>
 
