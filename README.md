@@ -28,15 +28,20 @@ Help collect data, improve models, write docs, deploy or run evaluations — all
 ## 🌍 Community
 
 ### Organization Stats
-<p align="center">
-  <img src="https://github-readme-stats.vercel.app/api/org/BurkimbIA?type=public" alt="BurkimbIA Organization Stats" />
-</p>
+<div align="center">
+
+![GitHub Org's stars](https://img.shields.io/github/stars/BurkimbIA?style=social)
+![GitHub followers](https://img.shields.io/github/followers/BurkimbIA?style=social)
+![GitHub repo count](https://img.shields.io/badge/repositories-dynamic-blue)
+
+</div>
 
 ### Our Contributors
 
 We are proud to have **5 active contributors** building the future of Burkinabé AI:
 
 | Contributor | GitHub Profile | BurkimbIA Contributions |
+
 |-------------|----------------|------------------------|
 | **MNIKIEMA** | [@MNIKIEMA](https://github.com/MNIKIEMA) | ![Contributions](https://github-readme-streak-stats.herokuapp.com/?user=MNIKIEMA&theme=dark&hide_border=true&background=0D1117&stroke=0D1117&ring=58A6FF&fire=58A6FF&currStreakLabel=58A6FF&sideNums=58A6FF&currStreakNum=58A6FF&dates=58A6FF&sideLabels=58A6FF) |
 | **Salfo Sawadogo** | [@sawallesalfo](https://github.com/sawallesalfo) | ![Contributions](https://github-readme-streak-stats.herokuapp.com/?user=sawallesalfo&theme=dark&hide_border=true&background=0D1117&stroke=0D1117&ring=58A6FF&fire=58A6FF&currStreakLabel=58A6FF&sideNums=58A6FF&currStreakNum=58A6FF&dates=58A6FF&sideLabels=58A6FF) |
@@ -52,9 +57,14 @@ We are proud to have **5 active contributors** building the future of Burkinabé
 
 ### BurkimbIA Project Statistics
 
-<p align="center">
-  <img src="https://github-readme-stats.vercel.app/api/pin/?username=BurkimbIA&repo=burkimbia&theme=tokyonight" />
-</p>
+<div align="center">
+
+![GitHub repo size](https://img.shields.io/github/repo-size/BurkimbIA/burkimbia?style=flat-square&color=blue)
+![GitHub issues](https://img.shields.io/github/issues/BurkimbIA/burkimbia?style=flat-square&color=red)
+![GitHub pull requests](https://img.shields.io/github/issues-pr/BurkimbIA/burkimbia?style=flat-square&color=green)
+![GitHub](https://img.shields.io/github/license/BurkimbIA/burkimbia?style=flat-square)
+
+</div>
 
 ### Repository Contributions
 
@@ -68,9 +78,13 @@ We are proud to have **5 active contributors** building the future of Burkinabé
 
 ### Top Languages in BurkimbIA
 
-<p align="center">
-  <img src="https://github-readme-stats.vercel.app/api/top-langs/?username=BurkimbIA&layout=compact&theme=tokyonight&langs_count=6" />
-</p>
+<div align="center">
+
+![Top Langs](https://github-readme-stats.vercel.app/api/top-langs/?username=sawallesalfo&layout=compact&theme=tokyonight&langs_count=6)
+
+*Representative sample from main contributors*
+
+</div>
 
 ### Join Our Community
 
