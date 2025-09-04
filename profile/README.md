@@ -45,15 +45,16 @@ Help collect data, improve models, write docs, deploy or run evaluations — all
 
 | Contributor | Commits |
 |-------------|---------|
-| MNIKIEMA | ![commits](https://img.shields.io/badge/commits-0-blue) |
-| sawallesalfo | ![commits](https://img.shields.io/badge/commits-0-blue) |
-| josiaskabore | ![commits](https://img.shields.io/badge/commits-0-blue) |
-| anyantudre | ![commits](https://img.shields.io/badge/commits-0-blue) |
-| Pegdwende649 | ![commits](https://img.shields.io/badge/commits-0-blue) |
+| MNIKIEMA | ![commits](https://img.shields.io/badge/dynamic/json?color=blue&label=&query=%24.contributor_commits.MNIKIEMA&url=https%3A%2F%2Fraw.githubusercontent.com%2FBurkimbIA%2FBurkimbIA%2Fmain%2Fmetrics_renders%2Forg-stats.json) |
+| sawallesalfo | ![commits](https://img.shields.io/badge/dynamic/json?color=blue&label=&query=%24.contributor_commits.sawallesalfo&url=https%3A%2F%2Fraw.githubusercontent.com%2FBurkimbIA%2FBurkimbIA%2Fmain%2Fmetrics_renders%2Forg-stats.json) |
+| josiaskabore | ![commits](https://img.shields.io/badge/dynamic/json?color=blue&label=&query=%24.contributor_commits.josiaskabore&url=https%3A%2F%2Fraw.githubusercontent.com%2FBurkimbIA%2FBurkimbIA%2Fmain%2Fmetrics_renders%2Forg-stats.json) |
+| anyantudre | ![commits](https://img.shields.io/badge/dynamic/json?color=blue&label=&query=%24.contributor_commits.anyantudre&url=https%3A%2F%2Fraw.githubusercontent.com%2FBurkimbIA%2FBurkimbIA%2Fmain%2Fmetrics_renders%2Forg-stats.json) |
+| Pegdwende649 | ![commits](https://img.shields.io/badge/dynamic/json?color=blue&label=&query=%24.contributor_commits.Pegdwende649&url=https%3A%2F%2Fraw.githubusercontent.com%2FBurkimbIA%2FBurkimbIA%2Fmain%2Fmetrics_renders%2Forg-stats.json) |
 
-*Stats will update after next workflow run*
 
 </td>
+*Auto-updated from organization statistics*
+
 </tr>
 </table>
 
@@ -72,12 +73,6 @@ Help collect data, improve models, write docs, deploy or run evaluations — all
 - 🌐 **[Translation Models Collection](https://huggingface.co/collections/burkimbia/translation-models-68b378344625c60e48e18684)** - Language translation tools
 - 🗣️ **[TTS Models Collection](https://huggingface.co/collections/burkimbia/tts-68b376e8d76075b6c48a2601)** - Text-to-speech synthesis models
 
-###Quick Links
-| Resource | Description | Status |
-|----------|-------------|--------|
-| [ASR Demo](https://huggingface.co/spaces/sawadogosalif/demo-asr) | Speech-to-text in Moore | ![Status](https://img.shields.io/badge/status-live-green) |
-| [Sachi Assistant](https://huggingface.co/spaces/sawadogosalif/demo-sachi) | AI Voice Assistant | ![Status](https://img.shields.io/badge/status-live-green) |
-| [Benchmarks](https://huggingface.co/collections/burkimbia/leaderboards-68b379b1070cffb23702b7bc) | Model Performance | ![Status](https://img.shields.io/badge/status-updated-blue) |
 
 ---
 
