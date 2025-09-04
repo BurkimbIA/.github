@@ -21,7 +21,7 @@ jobs:
         with:
           persist-credentials: true
 
-      - name: Generate metrics (no auto commit)
+      - name: Generate metrics
         uses: lowlighter/metrics@latest
         with:
           token: ${{ secrets.METRICS_TOKEN }}
@@ -37,6 +37,7 @@ jobs:
           plugin_activity_filter: all
           output_action: none
           filename: github-metrics.svg
+          committer_branch: ""
 
       - name: Compute comprehensive organization stats
         env:
@@ -138,11 +139,27 @@ jobs:
         run: |
           git config user.name "github-actions"
           git config user.email "github-actions@github.com"
+          
+          # Debug: List all generated files
+          echo "Files in current directory:"
+          ls -la
+          echo "Files in metrics_renders (if exists):"
+          ls -la metrics_renders/ || echo "metrics_renders directory not found"
+          
           # Move SVG to correct location if needed
           if [ -f "github-metrics.svg" ]; then
+            echo "Found github-metrics.svg at root, moving to metrics_renders/"
             mkdir -p metrics_renders
             mv github-metrics.svg metrics_renders/
+          elif [ -f "metrics_renders/github-metrics.svg" ]; then
+            echo "SVG already in metrics_renders/"
+          else
+            echo "ERROR: github-metrics.svg not found anywhere!"
+            echo "Checking for any SVG files:"
+            find . -name "*.svg" -type f
           fi
-          git add metrics_renders/github-metrics.svg metrics_renders/org-stats.json
+          
+          # Always add and commit (even if no changes)
+          git add metrics_renders/ || echo "No metrics_renders to add"
           git commit -m "chore(metrics): refresh metrics svg + org stats" || echo "No changes to commit"
           git push || echo "Nothing pushed"
