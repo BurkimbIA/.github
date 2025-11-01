@@ -3,7 +3,7 @@
 Ni yibeogo 🫡 <img src="https://upload.wikimedia.org/wikipedia/commons/3/31/Flag_of_Burkina_Faso.svg" alt="🇧🇫" width="25"/>
 
 **Who are we?**
-A community of engineers, researchers, students and professionals building the next generation of open Burkinabé AI models aligned with our values, identity and culture.
+A community of engineers, researchers, students and professionals building the next generation of open Burkinabè AI models aligned with our values, identity and culture.
 
 **Our goal**
 Build open-source **Moore** datasets and AI models. (Other local languages coming soon.)
