@@ -17,7 +17,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
         with:
           persist-credentials: true
 
@@ -40,114 +40,105 @@ jobs:
           committer_branch: ""
 
       - name: Compute comprehensive organization stats
+        if: always()  # do not skip stats just because the SVG step failed
         env:
           GH_TOKEN: ${{ secrets.METRICS_TOKEN }}
         run: |
-          echo "Fetching comprehensive stats for organization BurkimbIA"
-          
-          # Initialize counters
+          set -uo pipefail
+          ORG=BurkimbIA
+          META=.github/workflows/metadata.json
+
           public_repos=0
           private_repos=0
           total_commits=0
           total_prs=0
-          declare -A contributors
-          
-          # Load contributors from metadata
-          contributors_list=()
-          if [ -f ".github/workflows/metadata.json" ]; then
-            contributors_list=($(jq -r '.contributors[]' .github/workflows/metadata.json))
-          fi
-          
-          # Initialize contributor counters
-          for contributor in "${contributors_list[@]}"; do
-            contributors[$contributor]=0
-          done
-          
-          # Fetch all repositories (public and private)
-          page=1
-          while : ; do
-            resp=$(curl -s -H "Authorization: Bearer $GH_TOKEN" "https://api.github.com/orgs/BurkimbIA/repos?per_page=100&page=$page")
-            count=$(echo "$resp" | jq 'length')
-            if [ "$count" -eq 0 ]; then
-              break
+
+          # Load contributors list from metadata.json
+          mapfile -t contributors_list < <(jq -r '.contributors[]' "$META")
+          for c in "${contributors_list[@]}"; do echo 0 > "/tmp/contrib_${c}.txt"; done
+
+          # List all repos in the org (paginated automatically by gh)
+          gh api --paginate "/orgs/$ORG/repos?per_page=100" \
+            --jq '.[] | {name: .name, private: .private}' > /tmp/repos.jsonl
+
+          # IMPORTANT: read from a file (not a pipe) so counter increments survive the loop
+          while IFS= read -r line; do
+            [ -z "$line" ] && continue
+            repo=$(echo "$line" | jq -r '.name')
+            is_private=$(echo "$line" | jq -r '.private')
+
+            if [ "$is_private" = "true" ]; then
+              private_repos=$((private_repos + 1))
+            else
+              public_repos=$((public_repos + 1))
             fi
-            
-            # Count public/private repos
-            public_count=$(echo "$resp" | jq '[.[] | select(.private==false)] | length')
-            private_count=$(echo "$resp" | jq '[.[] | select(.private==true)] | length')
-            public_repos=$((public_repos + public_count))
-            private_repos=$((private_repos + private_count))
-            
-            # Process each repository for commits and PRs
-            echo "$resp" | jq -r '.[].name' | while read repo; do
-              if [ -n "$repo" ]; then
-                echo "Processing repo: $repo"
-                
-                # Count commits (limited to avoid API rate limits)
-                commits_resp=$(curl -s -H "Authorization: Bearer $GH_TOKEN" "https://api.github.com/repos/BurkimbIA/$repo/commits?per_page=100")
-                if [ "$commits_resp" != "null" ] && [ "$commits_resp" != "[]" ]; then
-                  commit_count=$(echo "$commits_resp" | jq 'length // 0')
-                  total_commits=$((total_commits + commit_count))
-                  
-                  # Count commits per contributor from metadata
-                  for contributor in "${contributors_list[@]}"; do
-                    contributor_commits=$(echo "$commits_resp" | jq --arg author "$contributor" '[.[] | select(.author.login == $author)] | length')
-                    if [ -f "/tmp/contrib_${contributor}.txt" ]; then
-                      current_count=$(cat "/tmp/contrib_${contributor}.txt")
-                    else
-                      current_count=0
-                    fi
-                    new_count=$((current_count + contributor_commits))
-                    echo "$new_count" > "/tmp/contrib_${contributor}.txt"
-                  done
-                fi
-                
-                # Count pull requests
-                prs_resp=$(curl -s -H "Authorization: Bearer $GH_TOKEN" "https://api.github.com/repos/BurkimbIA/$repo/pulls?state=all&per_page=100")
-                if [ "$prs_resp" != "null" ] && [ "$prs_resp" != "[]" ]; then
-                  pr_count=$(echo "$prs_resp" | jq 'length // 0')
-                  total_prs=$((total_prs + pr_count))
-                fi
-              fi
+
+            echo "::group::Processing $repo (private=$is_private)"
+
+            # Collect commits across ALL branches, then dedupe by SHA so a commit
+            # appearing on multiple branches is counted once. Captures every
+            # commit type (regular, merge, squash, force-pushed history, etc.).
+            : > /tmp/repo_commits.tsv
+            mapfile -t branches < <(gh api --paginate "/repos/$ORG/$repo/branches?per_page=100" --jq '.[].name' 2>/dev/null || true)
+            for br in "${branches[@]}"; do
+              [ -z "$br" ] && continue
+              gh api --paginate "/repos/$ORG/$repo/commits?sha=$br&per_page=100" \
+                --jq '.[] | [.sha, (.author.login // "")] | @tsv' 2>/dev/null \
+                >> /tmp/repo_commits.tsv || true
             done
-            
-            page=$((page + 1))
-          done
-          
-          # Count unique contributors
+
+            # Dedupe by SHA (column 1), keep first author seen
+            awk -F'\t' '!seen[$1]++' /tmp/repo_commits.tsv > /tmp/repo_unique.tsv
+            repo_commit_count=$(wc -l < /tmp/repo_unique.tsv)
+            total_commits=$((total_commits + repo_commit_count))
+            echo "  unique commits across all branches: $repo_commit_count"
+
+            # Per-contributor with alias expansion (main login + aliases → one counter)
+            for contributor in "${contributors_list[@]}"; do
+              logins_json=$(jq -c --arg c "$contributor" '[$c] + (.aliases[$c] // [])' "$META")
+              n=$(awk -F'\t' -v logins="$logins_json" '
+                BEGIN {
+                  gsub(/[\[\]"]/, "", logins);
+                  split(logins, a, ",");
+                  for (i in a) m[a[i]] = 1;
+                  c = 0;
+                }
+                ($2 in m) { c++ }
+                END { print c+0 }
+              ' /tmp/repo_unique.tsv)
+              current=$(cat "/tmp/contrib_${contributor}.txt")
+              echo $((current + n)) > "/tmp/contrib_${contributor}.txt"
+            done
+
+            # All PRs (open + closed + merged), paginated
+            pr_count=$(gh api --paginate "/repos/$ORG/$repo/pulls?state=all&per_page=100" --jq '.[].number' 2>/dev/null | wc -l)
+            total_prs=$((total_prs + pr_count))
+            echo "  pull requests (all states): $pr_count"
+            echo "::endgroup::"
+          done < /tmp/repos.jsonl
+
           total_contributors=${#contributors_list[@]}
-          
-          # Calculate commits per contributor
           commits_per_contributor=0
           if [ "$total_contributors" -gt 0 ]; then
             commits_per_contributor=$((total_commits / total_contributors))
           fi
-          
+
           timestamp=$(date -u +"%Y-%m-%dT%H:%M:%SZ")
           mkdir -p metrics_renders
-          
-          # Build contributors object
+
+          # Build contributors JSON object
           contributors_json="{"
           first=true
           for contributor in "${contributors_list[@]}"; do
-            if [ -f "/tmp/contrib_${contributor}.txt" ]; then
-              contrib_count=$(cat "/tmp/contrib_${contributor}.txt")
-            else
-              contrib_count=0
-            fi
-            
-            if [ "$first" = true ]; then
-              first=false
-            else
-              contributors_json+=","
-            fi
+            contrib_count=$(cat "/tmp/contrib_${contributor}.txt")
+            if [ "$first" = true ]; then first=false; else contributors_json+=","; fi
             contributors_json+="\"$contributor\": $contrib_count"
           done
           contributors_json+="}"
-          
+
           cat > metrics_renders/org-stats.json <<EOF
           {
-            "organization": "BurkimbIA",
+            "organization": "$ORG",
             "public_repositories": $public_repos,
             "private_repositories": $private_repos,
             "total_repositories": $((public_repos + private_repos)),
@@ -159,17 +150,12 @@ jobs:
             "updated_at": "$timestamp"
           }
           EOF
-          
+
           echo "Organization stats computed:"
-          echo "  Public repos: $public_repos"
-          echo "  Private repos: $private_repos"
-          echo "  Total commits: $total_commits"
-          echo "  Total PRs: $total_prs"
-          echo "  Contributors: $total_contributors"
-          echo "  Commits/contributor: $commits_per_contributor"
-          echo "  Individual contributions: $contributors_json"
+          cat metrics_renders/org-stats.json
 
       - name: Commit metrics (always)
+        if: always()
         run: |
           git config user.name "github-actions"
           git config user.email "github-actions@github.com"
