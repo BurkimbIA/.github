@@ -49,11 +49,12 @@ Become a Burkimbila an Help to  collect data, improve models, write docs, deploy
 
 | Contributor | Commits |
 |-------------|---------|
-| MNIKIEMA | ![commits](https://img.shields.io/badge/dynamic/json?color=blue&label=&query=%24.contributor_commits.MNIKIEMA&url=https%3A%2F%2Fraw.githubusercontent.com%2FBurkimbIA%2FBurkimbIA%2Fmain%2Fmetrics_renders%2Forg-stats.json) |
-| sawallesalfo | ![commits](https://img.shields.io/badge/dynamic/json?color=blue&label=&query=%24.contributor_commits.sawallesalfo&url=https%3A%2F%2Fraw.githubusercontent.com%2FBurkimbIA%2FBurkimbIA%2Fmain%2Fmetrics_renders%2Forg-stats.json) |
-| josiaskabore | ![commits](https://img.shields.io/badge/dynamic/json?color=blue&label=&query=%24.contributor_commits.josiaskabore&url=https%3A%2F%2Fraw.githubusercontent.com%2FBurkimbIA%2FBurkimbIA%2Fmain%2Fmetrics_renders%2Forg-stats.json) |
-| anyantudre | ![commits](https://img.shields.io/badge/dynamic/json?color=blue&label=&query=%24.contributor_commits.anyantudre&url=https%3A%2F%2Fraw.githubusercontent.com%2FBurkimbIA%2FBurkimbIA%2Fmain%2Fmetrics_renders%2Forg-stats.json) |
-| Pegdwende649 | ![commits](https://img.shields.io/badge/dynamic/json?color=blue&label=&query=%24.contributor_commits.Pegdwende649&url=https%3A%2F%2Fraw.githubusercontent.com%2FBurkimbIA%2FBurkimbIA%2Fmain%2Fmetrics_renders%2Forg-stats.json) |
+| [@MNIKIEMA](https://github.com/MNIKIEMA) | ![commits](https://img.shields.io/badge/dynamic/json?color=blue&label=&query=%24.contributor_commits.MNIKIEMA&url=https%3A%2F%2Fraw.githubusercontent.com%2FBurkimbIA%2FBurkimbIA%2Fmain%2Fmetrics_renders%2Forg-stats.json) |
+| [@sawallesalfo](https://github.com/sawallesalfo) | ![commits](https://img.shields.io/badge/dynamic/json?color=blue&label=&query=%24.contributor_commits.sawallesalfo&url=https%3A%2F%2Fraw.githubusercontent.com%2FBurkimbIA%2FBurkimbIA%2Fmain%2Fmetrics_renders%2Forg-stats.json) |
+| [@josiaskabore](https://github.com/josiaskabore) | ![commits](https://img.shields.io/badge/dynamic/json?color=blue&label=&query=%24.contributor_commits.josiaskabore&url=https%3A%2F%2Fraw.githubusercontent.com%2FBurkimbIA%2FBurkimbIA%2Fmain%2Fmetrics_renders%2Forg-stats.json) |
+| [@dev-josias](https://github.com/dev-josias) | ![commits](https://img.shields.io/badge/dynamic/json?color=blue&label=&query=%24.contributor_commits%5B%22dev-josias%22%5D&url=https%3A%2F%2Fraw.githubusercontent.com%2FBurkimbIA%2FBurkimbIA%2Fmain%2Fmetrics_renders%2Forg-stats.json) |
+| [@anyantudre](https://github.com/anyantudre) | ![commits](https://img.shields.io/badge/dynamic/json?color=blue&label=&query=%24.contributor_commits.anyantudre&url=https%3A%2F%2Fraw.githubusercontent.com%2FBurkimbIA%2FBurkimbIA%2Fmain%2Fmetrics_renders%2Forg-stats.json) |
+| [@Pegdwende649](https://github.com/Pegdwende649) | ![commits](https://img.shields.io/badge/dynamic/json?color=blue&label=&query=%24.contributor_commits.Pegdwende649&url=https%3A%2F%2Fraw.githubusercontent.com%2FBurkimbIA%2FBurkimbIA%2Fmain%2Fmetrics_renders%2Forg-stats.json) |
 
 
 </td>

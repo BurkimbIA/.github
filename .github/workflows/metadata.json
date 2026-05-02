@@ -1,10 +1,14 @@
 {
   "contributors": [
     "MNIKIEMA",
-    "sawallesalfo", 
+    "sawallesalfo",
     "josiaskabore",
+    "dev-josias",
     "anyantudre",
     "Pegdwende649"
   ],
-  "updated_at": "2025-09-04T00:00:00Z"
+  "aliases": {
+    "dev-josias": ["tuandevccs"]
+  },
+  "updated_at": "2026-05-02T00:00:00Z"
 }
