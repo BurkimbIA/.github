@@ -18,7 +18,7 @@ Resources are released for research & educational use. Contributors must respect
 
 * **GitHub:** [github.com/burkimbia](https://github.com/burkimbia)
 * **Developers Docs**: [https://developers.burkimbia.com/](https://developers.burkimbia.com/)
-* **Tutorials:** [https://burkimbia.github.io]( https://burkimbia.github.io/docs/)
+* **Community:** [https://community.burkimbia.com/](https://community.burkimbia.com/)
 * **Discord:** *coming soon*
 * **Contact:** contact@burkimbia.com
 
